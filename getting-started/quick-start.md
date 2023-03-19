@@ -22,23 +22,26 @@ $ npm init -y
 
 ### Install Requirements
 
-Next, we need to install the packages of Vercel and VCLight.
+Next, we need to install the packages of Vercel and VCLight, as well as ts type support
 
 You can choose your preferred package manager for this step.
 
 Use npm:
 ```shell
 $ npm install vercel vclight
+$ npm install @vercel/node -D
 ```
 
 Use yarn:
 ```shell
 $ yarn add vercel vclight
+$ yarn add @vercel/node -D
 ```
 
 USe pnpm:
 ```shell
 $ pnpm add vercel vclight
+$ pnpm add @vercel/node -D
 ```
 
 ### Create the Entry Point
@@ -47,8 +50,9 @@ Next, you need to create the project's entry point file `src/main.ts`
 
 ```TypeScript
 import VCLight from "vclight";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
-module.exports = async function(request, response) {
+module.exports = async function(request:VercelRequest, response:VercelResponse) {
     const app = new VCLight();
     //Add the plugins here
     await app.fetch(request, response);
@@ -81,6 +85,35 @@ So far, a blank project has been built. You can [debug it locally](#local-debugg
 {% hint style="info" %}
 The application will report an error when accessed because we haven't respond the request for it. In the next section, you will learn how to create a plugin to respond to requests.
 {% endhint %}
+
+## Start with VCLight Cli
+
+### Install Cli
+
+First, you have to install VCLight Cli. We recommand installing it globally.
+
+Use npm:
+```shell
+$ npm install -g vclight-cli
+```
+
+Use yarn:
+```shell
+$ yarn global add vclight-cli
+```
+
+Use pnpm:
+```shell
+$ pnpm -g add vclight-cli
+```
+
+### Create a Project
+
+```shell
+$ vclight create $projectName
+```
+
+You should replace `$projectName` to your project name.
 
 ## Local Debugging
 
