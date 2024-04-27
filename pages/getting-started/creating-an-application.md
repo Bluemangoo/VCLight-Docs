@@ -1,3 +1,12 @@
+---
+prev: 
+    text: Getting Started
+    link: /getting-started/getting-started
+next: 
+    text: Create a Middleware
+    link: /getting-started/create-a-middleware
+---
+
 # Creating an Application
 
 In this section, you will learn how to create an VCLight application.
@@ -24,12 +33,11 @@ First, we need to create a new **VCLight Instance**.
 const app = new VCLight();
 ```
 
-you can use `app.use(plugin)` to apply the plugin instance.
+you can use `app.use(middleware)` to apply the middleware instance.
 
-{% hint style="info" %}
-**Tips:** 
+::: tip
 
-It is not recommanded writing main part of your code here.
+It is not recommended writing main part of your code here.
 
 In the following sections, we will write the main part of code under `src/app/`.
-{% endhint %}
+:::

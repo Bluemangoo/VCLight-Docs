@@ -1,4 +1,13 @@
-# Quick Start
+---
+prev: 
+    text: Introduction
+    link: /getting-started/introduction
+next: 
+    text: Create an Application
+    link: /getting-started/create-an-application
+---
+
+# Getting Started
 
 ## Before Starting
 
@@ -11,11 +20,12 @@ Before starting, you have to complete the following things:
 
 In this section we will introduce how to build an empty project on your local machine. Created projects will use TypeScript and use Vercel-based native builds and debugging.
 
-Of course you can choose JavaScriptif you prefer it, but the following steps may require some adjustments.
+Of course you can choose JavaScript if you prefer it, but the following steps may require some adjustments.
 
 First, make sure you have an up-to-date version of [Node.js](https://nodejs.org/).
 
 Then create an empty project
+
 ```shell
 $ npm init -y
 ```
@@ -24,25 +34,22 @@ $ npm init -y
 
 Next, we need to install the packages of Vercel and VCLight, as well as ts type support
 
-You can choose your preferred package manager for this step.
-
-Use npm:
-```shell
+::: code-group
+```shell [npm]
 $ npm install vercel vclight
 $ npm install @vercel/node -D
 ```
 
-Use yarn:
-```shell
+```shell [yarn]
 $ yarn add vercel vclight
 $ yarn add @vercel/node -D
 ```
 
-USe pnpm:
-```shell
+```shell [pnpm]
 $ pnpm add vercel vclight
 $ pnpm add @vercel/node -D
 ```
+:::
 
 ### Create the Entry Point
 
@@ -54,7 +61,7 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 
 module.exports = async function(request:VercelRequest, response:VercelResponse) {
     const app = new VCLight();
-    //Add the plugins here
+    //Add the middlewares here
     await app.fetch(request, response);
 };
 ```
@@ -82,30 +89,29 @@ Next, you need to create a `vercel.json` file in the root directory to configure
 
 So far, a blank project has been built. You can [debug it locally](#local-debugging) or upload it to the cloud.
 
-{% hint style="info" %}
+::: info
 The application will report an error when accessed because we haven't respond the request for it. In the next section, you will learn how to create a plugin to respond to requests.
-{% endhint %}
+:::
 
 ## Start with VCLight Cli
 
 ### Install Cli
 
-First, you have to install VCLight Cli. We recommand installing it globally.
+First, you have to install VCLight Cli. We recommend installing it globally.
 
-Use npm:
-```shell
+::: code-group
+```shell [npm]
 $ npm install -g vclight-cli
 ```
 
-Use yarn:
-```shell
+```shell [yarn]
 $ yarn global add vclight-cli
 ```
 
-Use pnpm:
-```shell
+```shell [pnpm]
 $ pnpm -g add vclight-cli
 ```
+:::
 
 ### Create a Project
 
@@ -123,31 +129,28 @@ You can debug your application locally using the following command.
 $ npx vercel dev
 ```
 
-{% hint style="info" %}
-**Tip:** You can add the debug command to `package.json` to make it easier.
+::: tip
+You can add the debug command to `package.json` to make it easier.
 
 ```json
 "scripts": {
-  "serve": "vercel dev"
+  "dev": "vercel dev"
 },
 ```
-{% endhint %}
+:::
 
 If you have already added the debug script into `package.json` (added by default for template projects), you can debug more easily using the following script.
 
-Use npm：
-```shell
+::: code-group
+```shell [npm]
 $ npm run serve
 ```
 
-USe yarn：
-```shell
+```shell [yarn]
 $ yarn run serve
 ```
 
-USe pnpm
-```shell
+```shell [pnpm]
 $ pnpm run serve
 ```
-
-Which command to use depends on your preferred package manager.
+:::

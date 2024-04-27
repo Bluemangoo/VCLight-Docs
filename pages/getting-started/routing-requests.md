@@ -1,10 +1,17 @@
+---
+prev: 
+    text: Create a Middleware
+    link: /getting-started/create-a-middleware
+next: false
+---
+
 # Routing Requests
 
 In this section, you will learn how to use `vercel.json` to route requests to your VCLight instance.
 
-{% hint style="info" %}
-**Tips:** Detailed documentation about `vercel.json` can be found [here](https://vercel.com/docs/project-configuration)
-{% endhint %}
+::: tip
+Detailed documentation about `vercel.json` can be found [here](https://vercel.com/docs/project-configuration)
+:::
 
 ## Routing all Requests to the Instance
 
