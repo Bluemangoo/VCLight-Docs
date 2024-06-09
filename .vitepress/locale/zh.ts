@@ -1,4 +1,5 @@
 import { DefaultTheme } from "vitepress";
+import versions from "./versions";
 
 export function nav(): DefaultTheme.NavItem[] {
     return [
@@ -6,6 +7,10 @@ export function nav(): DefaultTheme.NavItem[] {
             text: "入门指南",
             link: "/zh/getting-started/introduction/",
             activeMatch: "/zh/guide/"
+        },
+        {
+            text: "历史版本",
+            items: versions()
         }
     ];
 }
@@ -14,9 +19,7 @@ export function sidebar(): DefaultTheme.SidebarMulti {
     return {
         "/zh/getting-started/": {
             base: "/zh/",
-            items: [
-                sidebarItem.gettingStarted(false)
-            ]
+            items: [sidebarItem.gettingStarted(false)]
         }
     };
 }

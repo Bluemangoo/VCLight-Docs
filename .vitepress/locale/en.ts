@@ -1,4 +1,5 @@
 import { DefaultTheme } from "vitepress";
+import versions from "./versions";
 
 export function nav(): DefaultTheme.NavItem[] {
     return [
@@ -6,6 +7,10 @@ export function nav(): DefaultTheme.NavItem[] {
             text: "Guide",
             link: "/zh/getting-started/introduction/",
             activeMatch: "/zh/guide/"
+        },
+        {
+            text: "History Versions",
+            items: versions()
         }
     ];
 }
