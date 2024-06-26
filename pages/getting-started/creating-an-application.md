@@ -9,35 +9,29 @@ next:
 
 # Creating an Application
 
-In this section, you will learn how to create an VCLight application.
+In this section, you will learn about the files of the project we created in the previous section.
 
-Tips: This may be a repeat of the previous section.
+Tips: This may be a repeat of the previous section. If you don't want to learn it, you can skip this section.
 
-If you don't want to learn it, you can skip this section.
+First, we need to create a new **application instance**. And export it.
 
-## Entry Point
+```TypeScript
+const app = new VCLight();
+export default app;
+```
+
+In the following sections, you can use `app.use(middleware)` to apply the middleware instance.
+
+::: tip
+We do not recommend that you write your main code in this section.
+
+In the following tutorials, the main code will be under `src/app/`.
+:::
+
+## Entry Point File
 
 For Vercel, it needs an exported function.
 
 ```TypeScript
-module.exports = async function(request:VercelRequest, response:VercelResponse) {};
+export default app.vercelHandler();
 ```
-
-Inside this function, we can write our main code.
-
-### Main Function
-
-First, we need to create a new **VCLight Instance**.
-
-```TypeScript
-const app = new VCLight();
-```
-
-you can use `app.use(middleware)` to apply the middleware instance.
-
-::: tip
-
-It is not recommended writing main part of your code here.
-
-In the following sections, we will write the main part of code under `src/app/`.
-:::

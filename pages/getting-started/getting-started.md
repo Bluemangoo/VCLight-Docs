@@ -95,29 +95,21 @@ The application will report an error when accessed because we haven't respond th
 
 ## Start with VCLight Cli
 
-### Install Cli
-
-First, you have to install VCLight Cli. We recommend installing it globally.
+### Create a Project
 
 ::: code-group
 ```shell [npm]
-$ npm install -g vclight-cli
+$ npx install -g @vclight/cli@latest
 ```
 
 ```shell [yarn]
-$ yarn global add vclight-cli
+$ yarn dlx @vclight/cli@latest
 ```
 
 ```shell [pnpm]
-$ pnpm -g add vclight-cli
+$ pnpx  @vclight/cli@latest
 ```
 :::
-
-### Create a Project
-
-```shell
-$ vclight create $projectName
-```
 
 You should replace `$projectName` to your project name.
 
