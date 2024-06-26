@@ -19,7 +19,17 @@ export function sidebar(): DefaultTheme.SidebarMulti {
     return {
         "/zh/getting-started/": {
             base: "/zh/",
-            items: [sidebarItem.gettingStarted(false)]
+            items: [
+                sidebarItem.gettingStarted(false),
+                sidebarItem.reference(true)
+            ]
+        },
+        "/zh/reference/": {
+            base: "/zh/",
+            items: [
+                sidebarItem.gettingStarted(true),
+                sidebarItem.reference(false)
+            ]
         }
     };
 }
@@ -49,6 +59,22 @@ const sidebarItem = {
                 {
                     text: "路由请求",
                     link: "/getting-started/routing-requests"
+                }
+            ]
+        };
+    },
+    reference(collapsed: boolean): DefaultTheme.SidebarItem {
+        return {
+            text: "参考",
+            collapsed,
+            items: [
+                {
+                    text: "VCLightRequest",
+                    link: "/reference/vclight-request"
+                },
+                {
+                    text: "VCLightResponse",
+                    link: "/reference/vclight-response"
                 }
             ]
         };

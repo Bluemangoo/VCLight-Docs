@@ -5,8 +5,8 @@ export function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: "Guide",
-            link: "/zh/getting-started/introduction/",
-            activeMatch: "/zh/guide/"
+            link: "/getting-started/introduction/",
+            activeMatch: "/guide/"
         },
         {
             text: "History Versions",
@@ -20,7 +20,15 @@ export function sidebar(): DefaultTheme.SidebarMulti {
         "/getting-started/": {
             base: "",
             items: [
-                sidebarItem.gettingStarted(false)
+                sidebarItem.gettingStarted(false),
+                sidebarItem.reference(true)
+            ]
+        },
+        "/reference/": {
+            base: "",
+            items: [
+                sidebarItem.gettingStarted(true),
+                sidebarItem.reference(false)
             ]
         }
     };
@@ -51,6 +59,22 @@ const sidebarItem = {
                 {
                     text: "Routing Requests",
                     link: "/getting-started/routing-requests"
+                }
+            ]
+        };
+    },
+    reference(collapsed: boolean): DefaultTheme.SidebarItem {
+        return {
+            text: "Reference",
+            collapsed,
+            items: [
+                {
+                    text: "VCLightRequest",
+                    link: "/reference/vclight-request"
+                },
+                {
+                    text: "VCLightResponse",
+                    link: "/reference/vclight-response"
                 }
             ]
         };
