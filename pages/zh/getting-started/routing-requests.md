@@ -1,7 +1,7 @@
 ---
 prev: 
     text: 创建一个中间件
-    link: /zh/getting-started/create-a-middleware
+    link: /zh/getting-started/creating-a-middleware
 next: false
 ---
 

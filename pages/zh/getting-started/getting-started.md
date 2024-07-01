@@ -4,7 +4,7 @@ prev:
     link: /zh/getting-started/introduction
 next: 
     text: 创建一个应用
-    link: /zh/getting-started/create-an-application
+    link: /zh/getting-started/creating-an-application
 ---
 
 # 快速开始

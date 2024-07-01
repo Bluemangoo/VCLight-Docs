@@ -4,7 +4,7 @@ prev:
     link: /getting-started/introduction
 next: 
     text: Create an Application
-    link: /getting-started/create-an-application
+    link: /getting-started/creating-an-application
 ---
 
 # Getting Started

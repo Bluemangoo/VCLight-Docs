@@ -1,7 +1,7 @@
 ---
 prev:
     text: 创建一个应用
-    link: /zh/getting-started/create-an-application
+    link: /zh/getting-started/creating-an-application
 next:
     text: 路由请求
     link: /zh/getting-started/routing-requests

@@ -4,7 +4,7 @@ prev:
     link: /zh/getting-started/getting-started
 next: 
     text: 创建一个中间件
-    link: /zh/getting-started/create-a-middleware
+    link: /zh/getting-started/creating-a-middleware
 ---
 
 # 创建一个应用

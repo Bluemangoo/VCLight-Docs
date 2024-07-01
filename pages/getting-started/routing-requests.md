@@ -1,7 +1,7 @@
 ---
 prev: 
     text: Create a Middleware
-    link: /getting-started/create-a-middleware
+    link: /getting-started/creating-a-middleware
 next: false
 ---
 

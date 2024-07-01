@@ -1,7 +1,7 @@
 ---
 prev:
     text: Create an Application
-    link: /getting-started/create-an-application
+    link: /getting-started/creating-an-application
 next:
     text: Routing Requests
     link: /getting-started/routing-requests
