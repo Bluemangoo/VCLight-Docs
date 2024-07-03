@@ -21,7 +21,7 @@ hero:
       link: https://github.com/Bluemangoo/VCLight
   image:
     src: /vclight.png
-    alt: WhirlScript
+    alt: VCLight Logo
 
 features:
   - icon: 📝
