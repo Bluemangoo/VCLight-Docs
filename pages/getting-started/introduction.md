@@ -1,24 +1,28 @@
 ---
 prev: false
-next: 
+next:
     text: Getting Started
     link: /getting-started/getting-started
 ---
 
 # Introduction
 
-VClight is a framework for Vercel Serverless Function.
+VCLight is a lightweight middleware framework for serverless and edge-style request handling.
 
 ## What is VCLight?
 
-VClight is a framework for Vercel Serverless Function. It can help you process all pages in one function, to build a complete site.
+VCLight lets you process requests through a middleware pipeline and then expose the app through different handlers:
 
-You can use it to build a dynamic site, to make up for the fact that vercel can only create static sites.
+- `httpHandler()` for Node HTTP
+- `vercelHandler()` for Vercel Node runtime
+- `vercelFunctionHandler()` for Vercel Functions
+- `netlifyHandler()` for Netlify Functions
+- `cloudflareHandler()` for Cloudflare Workers
 
-VCLight is based on plugins. You can write plugins and apply them, or use third-party modules.
+You can start from a blank app or use `@vclight/router` to map URL paths to handlers quickly.
 
 ::: tip
 **Prerequisites:**
 
-The rest of the documentation assumes basic familiarity with HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics and then come back! You can check your knowledge level with [this JavaScript overview](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript). Prior experience with other frameworks helps, but is not required.
+The rest of the docs assume basic JavaScript and TypeScript familiarity.
 :::

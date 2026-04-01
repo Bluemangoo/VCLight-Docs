@@ -2,7 +2,7 @@
 layout: home
 
 title: VCLight
-titleTemplate: A framework for Vercel Serverless Function
+titleTemplate: A lightweight framework for serverless and edge handlers
 
 hero:
   name: VCLight

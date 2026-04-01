@@ -6,7 +6,12 @@ export function nav(): DefaultTheme.NavItem[] {
         {
             text: "入门指南",
             link: "/zh/getting-started/introduction/",
-            activeMatch: "/zh/guide/"
+            activeMatch: "/zh/getting-started/"
+        },
+        {
+            text: "参考",
+            link: "/zh/reference/vclight-request/",
+            activeMatch: "/zh/reference/"
         },
         {
             text: "历史版本",
@@ -57,6 +62,10 @@ const sidebarItem = {
                     link: "/getting-started/creating-a-middleware"
                 },
                 {
+                    text: "使用 Router",
+                    link: "/getting-started/using-router"
+                },
+                {
                     text: "路由请求",
                     link: "/getting-started/routing-requests"
                 }
@@ -75,6 +84,10 @@ const sidebarItem = {
                 {
                     text: "VCLightResponse",
                     link: "/reference/vclight-response"
+                },
+                {
+                    text: "waitUntil API",
+                    link: "/reference/wait-until"
                 }
             ]
         };

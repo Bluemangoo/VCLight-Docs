@@ -5,29 +5,48 @@ next: false
 
 # VCLightRequest
 
-一个 VCLightRequest 对象有如下字段：
+`VCLightRequest` 包含以下字段：
 
 ```typescript
-class VCLightRequest{
+class VCLightRequest {
     rawRequest: RawRequest;
-    source: "http" | "vercel" | "netlify";
+    source: "http" | "vercel" | "vercel-function" | "netlify" | "cloudflare";
 
     headers: IncomingHttpHeaders;
     method: string;
     url: string;
 
     body: any;
+    env: any;
 }
 ```
 
 ## rawRequest
 
-`rawRequest` 是原始请求对象，其类型取决于 `source` 字段。
+`rawRequest` 是平台相关的原始请求包装对象，具体类型取决于 `source`。
 
-它包含了原始 request 对象和原始 response 对象。你可以通过 `instanceof` 来判断它的类型。
+## source
 
-### headers
+`source` 表示请求来源：
 
-`headers` 是请求头对象，它**实际上**是一个键值对，键是请求头的名称，值是请求头的值。
+- `http`：来自 `app.httpHandler()`
+- `vercel`：来自 `app.vercelHandler()`
+- `vercel-function`：来自 `app.vercelFunctionHandler()`
+- `netlify`：来自 `app.netlifyHandler()`
+- `cloudflare`：来自 `app.cloudflareHandler()`
 
-需要提醒的是，很多框架会提供很多信息例如 get 查询参数、cookie 等。VCLight 并不是没有提供这些信息，只是没有解析，需要你自己从 `headers` 中解析。
+## headers
+
+`headers` 是请求头键值映射。
+
+## body
+
+`body` 为请求体解析结果。不同平台和 `content-type` 下解析行为会有差异。
+
+## env
+
+`env` 保存运行时环境数据：
+
+- Node 类处理器：`process.env`
+- Vercel Functions：`@vercel/functions` 的 `getEnv()` 返回值
+- Cloudflare：`cloudflareHandler()` 传入的 `env`

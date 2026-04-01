@@ -1,37 +1,84 @@
 ---
-prev: 
+prev:
     text: Getting Started
     link: /getting-started/getting-started
-next: 
+next:
     text: Create a Middleware
     link: /getting-started/creating-a-middleware
 ---
 
 # Creating an Application
 
-In this section, you will learn about the files of the project we created in the previous section.
+Create a VCLight app instance in `src/app/app.ts`:
 
-Tips: This may be a repeat of the previous section. If you don't want to learn it, you can skip this section.
+```typescript
+import VCLight from "vclight";
 
-First, we need to create a new **application instance**. And export it.
+const app = new VCLight({
+    onError: async (_request, response) => {
+        response.status = 500;
+        response.response = "Internal Server Error";
+        response.end = true;
+    }
+});
 
-```TypeScript
-const app = new VCLight();
 export default app;
 ```
 
-In the following sections, you can use `app.use(middleware)` to apply the middleware instance.
+Then register middleware with `app.use(...)`.
 
-::: tip
-We do not recommend that you write your main code in this section.
+```typescript
+import router from "./router";
 
-In the following tutorials, the main code will be under `src/app/`.
-:::
+app.use(router);
+```
 
-## Entry Point File
+## Entry files
 
-For Vercel, it needs an exported function.
+Choose one or more handlers based on your deployment target.
 
-```TypeScript
+### Vercel
+
+```typescript
+import app from "./app/app";
+
 export default app.vercelHandler();
+```
+
+### Vercel Functions
+
+Vercel Functions (Edge Runtime) require wrapping with a `fetch` property:
+
+```typescript
+import app from "./app/app";
+
+export default {
+    fetch: app.vercelFunctionHandler()
+};
+```
+
+### Netlify
+
+```typescript
+import app from "../../src/app/app";
+
+export default app.netlifyHandler();
+```
+
+### Cloudflare Workers
+
+```typescript
+import app from "./app/app";
+
+export default app.cloudflareHandler();
+```
+
+### Node HTTP
+
+```typescript
+import * as http from "http";
+import app from "./app/app";
+
+const server = http.createServer();
+server.on("request", app.httpHandler());
 ```

@@ -2,7 +2,7 @@
 layout: home
 
 title: VCLight
-titleTemplate: 一个适用于 Vercel 的 Serverless 函数框架
+titleTemplate: 一个轻量的 Serverless / Edge 处理框架
 
 hero:
   name: VCLight
@@ -17,11 +17,11 @@ hero:
       text: 快速开始
       link: /zh/getting-started/getting-started
     - theme: alt
-      text: View on GitHub
+      text: 在 GitHub 上查看
       link: https://github.com/Bluemangoo/VCLight
   image:
     src: /vclight.png
-    alt: WhirlScript
+    alt: VCLight Logo
 
 features:
   - icon: 📝

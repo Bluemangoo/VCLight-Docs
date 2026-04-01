@@ -1,23 +1,21 @@
 ---
-prev: 
-    text: 创建一个中间件
-    link: /zh/getting-started/creating-a-middleware
+prev:
+    text: 使用 Router
+    link: /zh/getting-started/using-router
 next: false
 ---
 
 # 路由请求
 
-在这一节中，你会了解到如何使用 `vercel.json` 文件将请求路由到 VCLight 实例。
+通过 `vercel.json` 将请求路由到 VCLight 入口函数。
 
 ::: tip
-关于 `vercel.json` 的详细文档，可以在[这里](https://vercel.com/docs/project-configuration)找到
+Vercel 配置文档：[Project Configuration](https://vercel.com/docs/project-configuration)
 :::
 
-## 路由所有请求到实例
+## 所有请求都交给 VCLight
 
-在 `vercel.json` 中写入这些可以使所有流量全部经过实例。
-
-```Json
+```json
 {
   "builds": [
     {
@@ -28,36 +26,30 @@ next: false
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/main.ts"
+      "dest": "src/vercelEntry.ts"
     }
   ]
 }
 ```
 
-其中，`builds` 项标示了项目将以什么方式被构建。
+## 仅路由部分请求
 
-需要注意的是，如果你没有填写这一项， Vercel 会使用 `package.json` 中的 `build` 脚本来构建。
+如果只希望 `/api/*` 走 VCLight：
 
-`routes` 项标示了请求应该被路由到哪里。
-
-如果几项路由有冲突，Vercel 会使用在列表中排列更前面的那项。
-
-## 路由部分请求到实例
-
-如果你只是想让 `/api/*` 的部分经过实例，你应该这样填写 `routes` 项：
-
-```Json
-"routes": [
-  {
-    "src": "/api/(.*)",
-    "dest": "src/main.ts"
-  }
-]
+```json
+{
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/vercelEntry.ts"
+    }
+  ]
+}
 ```
 
-如果你想让静态文件不经过实例，你可以这样填写 `vercel.json`：
+## 让静态资源不经过 VCLight
 
-```Json
+```json
 {
   "builds": [
     {
@@ -76,7 +68,7 @@ next: false
     },
     {
       "src": "/(.*)",
-      "dest": "src/main.ts"
+      "dest": "src/vercelEntry.ts"
     }
   ]
 }

@@ -5,39 +5,42 @@ next: false
 
 # VCLightResponse
 
-一个 VCLightResponse 对象有如下字段：
+`VCLightResponse` 包含以下字段：
 
 ```typescript
-class VCLightResponse{
-    redirect: boolean = false;
-    redirectUrl: string = "/";
-    status: number = 200;
-    response: any = "";
-    headers: OutgoingHttpHeaders = {};
-    builder: ResponseBuilder | undefined;
-    end: boolean = false;
-    context: { [key: string]: any } = {};
+class VCLightResponse {
+    redirect: boolean;
+    redirectUrl: string;
+    status: number;
+    response: any;
+    headers: OutgoingHttpHeaders;
+    end: boolean;
+    context: { [key: string]: any };
 }
 ```
 
-## redirect
+## redirect / redirectUrl
 
-`redirect` 是一个布尔值，表示是否重定向。
+设置 `redirect = true` 并指定 `redirectUrl` 可触发重定向。
 
-如果此值被设置为 true, 那么非 3xx 的状态码将被忽略并强制修改为 307，而 `redirectUrl` 将被用于重定向。
+当 `redirect` 为 `true` 且状态码不是 3xx 时，VCLight 会把状态码调整为 `307`。
+
+## status
+
+`status` 是 HTTP 状态码，默认 `200`。
 
 ## response
 
-`response` 是响应内容。如果你填写的不是字符串，那么它将被转换为字符串。
+`response` 是响应内容。对象会在发送前被序列化为 JSON 字符串。
 
 ## headers
 
-返回头内容。
+`headers` 是响应头映射。
 
 ## end
 
-`end` 是一个布尔值，表示处理是否结束。如果已结束，那么不会再执行后续的中间件。
+设置 `end = true` 后，`process` 阶段不会继续执行后续中间件。
 
 ## context
 
-`context` 是一个对象，用于存储一些中间件之间的数据。
+`context` 用于在中间件间传递共享数据。

@@ -17,7 +17,7 @@ export default defineConfig({
             lang: "en",
             title: "VCLight",
             titleTemplate: "VCLight Docs",
-            description: "A framework for Vercel Serverless Function",
+            description: "A lightweight framework for serverless and edge handlers",
             themeConfig: {
                 editLink: {
                     pattern:
@@ -35,7 +35,7 @@ export default defineConfig({
             link: "/zh/",
             title: "VCLight",
             titleTemplate: "VCLight 文档",
-            description: "一个适用于 Vercel 的 Serverless 函数框架",
+            description: "一个轻量的 Serverless / Edge 处理框架",
             themeConfig: {
                 editLink: {
                     pattern:

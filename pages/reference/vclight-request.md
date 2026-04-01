@@ -5,27 +5,48 @@ next: false
 
 # VCLightRequest
 
-A VCLightRequest object has the following fields:
+A `VCLightRequest` object includes the following fields:
 
 ```typescript
-class VCLightRequest{
+class VCLightRequest {
     rawRequest: RawRequest;
-    source: "http" | "vercel" | "netlify";
+    source: "http" | "vercel" | "vercel-function" | "netlify" | "cloudflare";
 
     headers: IncomingHttpHeaders;
     method: string;
     url: string;
 
     body: any;
+    env: any;
 }
 ```
 
 ## rawRequest
 
-`rawRequest` is the raw request object, its type depends on the `source` field.
+`rawRequest` stores the platform-specific request wrapper. Its concrete type depends on `source`.
 
-It contains the original request object and the original response object. You can use `instanceof` to determine its type.
+## source
 
-### headers
+`source` indicates which handler created the request:
 
-`headers` is the request header object, which is **actually** a key-value pair, where the key is the name of the request header and the value is the value of the request header.
+- `http` from `app.httpHandler()`
+- `vercel` from `app.vercelHandler()`
+- `vercel-function` from `app.vercelFunctionHandler()`
+- `netlify` from `app.netlifyHandler()`
+- `cloudflare` from `app.cloudflareHandler()`
+
+## headers
+
+`headers` is a key-value map of request headers.
+
+## body
+
+`body` is parsed from the incoming request. Parsing behavior depends on the platform and content type.
+
+## env
+
+`env` contains runtime environment data:
+
+- Node-based handlers: `process.env`
+- Vercel Functions: value from `@vercel/functions` `getEnv()`
+- Cloudflare: the `env` argument passed to `cloudflareHandler()`

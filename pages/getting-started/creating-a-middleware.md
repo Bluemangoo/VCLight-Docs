@@ -3,72 +3,50 @@ prev:
     text: Create an Application
     link: /getting-started/creating-an-application
 next:
-    text: Routing Requests
-    link: /getting-started/routing-requests
+    text: Using Router
+    link: /getting-started/using-router
 ---
 
 # Creating a Middleware
 
-In this section, you will learn how to create and apply a middleware.
+A middleware must implement `VCLightMiddleware`.
 
-## Middleware Interface
+## Middleware interface
 
-The middleware interface is declared like this:
+```typescript
+import { VCLightMiddleware, VCLightRequest, VCLightResponse, VCLightApp } from "vclight";
 
-```Typescript
 export default interface VCLightMiddleware {
-    process(request: VCLightRequest, response: VCLightResponse, responseContent: VCLightResponse, app: VCLight): Promise<void>;
-
-    post(request: VCLightRequest, response: VCLightResponse, responseContent: VCLightResponse, app: VCLight): Promise<void>;
+    process(request: VCLightRequest, response: VCLightResponse, app: VCLightApp): Promise<void>;
+    post(request: VCLightRequest, response: VCLightResponse, app: VCLightApp): Promise<void>;
 }
 ```
 
-This means that you need to have two functions in your middleware, `process` and `post`.
+- `process` runs in registration order
+- `post` runs in reverse order after all `process` calls
 
-In `process`, you should include the request processing, and in `post`, you should include the processing after the request is processed. Note that the earlier the middleware is applied, the earlier the `process` function is called, and the later the `post` function is called.
+## Example middleware
 
-## Creating a Middleware Class
+```typescript
+import { VCLightMiddleware, VCLightRequest, VCLightResponse, VCLightApp } from "vclight";
 
-The middleware class needs to meet the `VCLightMiddleware` interface. [VCLightRequest](../../reference/vclight-request) and [VCLightResponse](../../reference/vclight-response) are VCLight's request and response classes.
-
-```Typescript
-export default interface VCLightMiddleware {
-    process(request: VCLightRequest, response: VCLightResponse, responseContent: VCLightResponse, app: VCLightApp): Promise<void>;
-
-    post(request: VCLightRequest, response: VCLightResponse, responseContent: VCLightResponse, app: VCLightApp): Promise<void>;
-}
-```
-
-Now you can fill in the code in these two functions.
-
-For example, if you want to display "Hello!" when accessing `/hello/`, you can do this:
-
-```Typescript
 class ExampleMiddleware implements VCLightMiddleware {
-    async process(request: VCLightRequest, response: VCLightResponse, responseContent: Response, app: VCLightApp): Promise<void> {
-        if(url.parse(<string>request.url).pathname == "/hello/") {
-            responseContent.response = "Hello!";
+    async process(request: VCLightRequest, response: VCLightResponse, _app: VCLightApp): Promise<void> {
+        if (request.url === "/hello/") {
+            response.response = "Hello!";
+            response.end = true;
         }
     }
 
-    async post(request: VCLightRequest, response: VCLightResponse, app: VCLightApp): Promise<void> {
-        // We don't need to do anything here for now
+    async post(_request: VCLightRequest, _response: VCLightResponse, _app: VCLightApp): Promise<void> {
+        // Optional post-processing
     }
 }
 ```
 
-## Applying the Middleware
+## Apply middleware
 
-To apply the middleware, you need to create a middleware instance first:
-
-```Typescript
+```typescript
 const exampleMiddleware = new ExampleMiddleware();
-```
-
-Then, you can use it like this:
-
-```Typescript
 app.use(exampleMiddleware);
 ```
-
-Now, the middleware will be applied to the app.

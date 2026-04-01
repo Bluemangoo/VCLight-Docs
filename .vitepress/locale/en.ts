@@ -6,7 +6,12 @@ export function nav(): DefaultTheme.NavItem[] {
         {
             text: "Guide",
             link: "/getting-started/introduction/",
-            activeMatch: "/guide/"
+            activeMatch: "/getting-started/"
+        },
+        {
+            text: "Reference",
+            link: "/reference/vclight-request/",
+            activeMatch: "/reference/"
         },
         {
             text: "History Versions",
@@ -57,6 +62,10 @@ const sidebarItem = {
                     link: "/getting-started/creating-a-middleware"
                 },
                 {
+                    text: "Using Router",
+                    link: "/getting-started/using-router"
+                },
+                {
                     text: "Routing Requests",
                     link: "/getting-started/routing-requests"
                 }
@@ -75,6 +84,10 @@ const sidebarItem = {
                 {
                     text: "VCLightResponse",
                     link: "/reference/vclight-response"
+                },
+                {
+                    text: "waitUntil API",
+                    link: "/reference/wait-until"
                 }
             ]
         };

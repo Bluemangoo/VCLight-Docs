@@ -5,39 +5,42 @@ next: false
 
 # VCLightResponse
 
-A VCLightResponse object has the following fields:
+A `VCLightResponse` object includes the following fields:
 
 ```typescript
-class VCLightResponse{
-    redirect: boolean = false;
-    redirectUrl: string = "/";
-    status: number = 200;
-    response: any = "";
-    headers: OutgoingHttpHeaders = {};
-    builder: ResponseBuilder | undefined;
-    end: boolean = false;
-    context: { [key: string]: any } = {};
+class VCLightResponse {
+    redirect: boolean;
+    redirectUrl: string;
+    status: number;
+    response: any;
+    headers: OutgoingHttpHeaders;
+    end: boolean;
+    context: { [key: string]: any };
 }
 ```
 
-## redirect
+## redirect / redirectUrl
 
-`redirect` is a boolean value that indicates whether to redirect.
+Set `redirect = true` and `redirectUrl` to enable redirect behavior.
 
-If this value is set to true, non-3xx status codes will be ignored and forcibly changed to 307, and `redirectUrl` will be used for redirection.
+If `redirect` is `true` and status is not 3xx, VCLight adjusts status to `307`.
+
+## status
+
+`status` is the HTTP status code. Default is `200`.
 
 ## response
 
-`response` is the response content. If you fill in something that is not a string, it will be converted to a string.
+`response` is the response payload. Objects are serialized to JSON strings before sending.
 
 ## headers
 
-The header content.
+`headers` is the outgoing header map.
 
 ## end
 
-`end` is a boolean value that indicates whether the processing is over. If it is over, the subsequent middleware will not be executed.
+Set `end = true` to stop executing remaining middleware in the `process` phase.
 
 ## context
 
-`context` is an object used to store data between some middleware.
+`context` is a shared object for passing data between middleware.

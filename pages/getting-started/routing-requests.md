@@ -1,23 +1,21 @@
 ---
-prev: 
-    text: Create a Middleware
-    link: /getting-started/creating-a-middleware
+prev:
+    text: Using Router
+    link: /getting-started/using-router
 next: false
 ---
 
 # Routing Requests
 
-In this section, you will learn how to use `vercel.json` to route requests to your VCLight instance.
+Use `vercel.json` to route traffic into your VCLight entry function.
 
 ::: tip
-Detailed documentation about `vercel.json` can be found [here](https://vercel.com/docs/project-configuration)
+See Vercel project configuration docs: [Project Configuration](https://vercel.com/docs/project-configuration)
 :::
 
-## Routing all Requests to the Instance
+## Route all requests
 
-This will make all traffic to go through the instance.
-
-```Json
+```json
 {
   "builds": [
     {
@@ -28,36 +26,30 @@ This will make all traffic to go through the instance.
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/main.ts"
+      "dest": "src/vercelEntry.ts"
     }
   ]
 }
 ```
 
-Among them, the `builds` item indicates how the project will be built.
+## Route only part of requests
 
-It should be noted that, if `builds` item is missing, Vercel will use the `build` script in `package.json` to build.
+If only `/api/*` should go through VCLight:
 
-The `routes` item indicates where the request should be routed.
-
-If several routes conflict, Vercel will use the one that is higher in the list.
-
-## Routing Part of Requests to the Instance
-
-If you just want the `/api/*` part to go through the instance, you should fill the `routes` item like this:
-
-```Json
-"routes": [
-  {
-    "src": "/api/(.*)",
-    "dest": "src/main.ts"
-  }
-]
+```json
+{
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/vercelEntry.ts"
+    }
+  ]
+}
 ```
 
-If you want static files to not pass through the instance, you can fill `vercel.json` like this:
+## Keep static assets outside VCLight
 
-```Json
+```json
 {
   "builds": [
     {
@@ -76,7 +68,7 @@ If you want static files to not pass through the instance, you can fill `vercel.
     },
     {
       "src": "/(.*)",
-      "dest": "src/main.ts"
+      "dest": "src/vercelEntry.ts"
     }
   ]
 }
